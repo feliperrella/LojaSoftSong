@@ -80,6 +80,15 @@ public class HomeActivity extends Activity {
                                             startActivity(x, ActivityOptions.makeSceneTransitionAnimation(HomeActivity.this).toBundle());
                                         }}, 700);
                                     break;
+                                case 2:
+                                    new Handler().postDelayed(new Runnable()
+                                    {
+                                        @Override
+                                        public void run() {
+                                            Intent x = new Intent(HomeActivity.this, CarrinhoActivity.class);
+                                            startActivity(x, ActivityOptions.makeSceneTransitionAnimation(HomeActivity.this).toBundle());
+                                        }}, 700);
+                                    break;
                             }
                         }
                     });

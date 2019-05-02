@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent x = new Intent(MainActivity.this, SigninActivity.class);
                 View sharedButton = findViewById(R.id.btnCadastro);
                 View sharedImage = findViewById(R.id.logo);
-                ActivityOptions activityOptions = (ActivityOptions) ActivityOptions.makeSceneTransitionAnimation(MainActivity.this, sharedImage, "logo");
+                ActivityOptions activityOptions = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this, sharedImage, "logo");
                 startActivity(x, activityOptions.toBundle());
             }
         });
@@ -98,15 +98,16 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(String... strings) {
             try {
+                conexao = new ClasseConexao();
                 Connection connection = conexao.CONN();
                 if(connection != null)
                 {
                     Statement stmt = connection.createStatement();
-                    String query = "Select * from tblUsuario where email = '" + usu.getText().toString() + "' and senha = '" + senh.getText().toString() + "'";
+                    //String query = "Select * from tblUsuario where email = '" + usu.getText().toString() + "' and senha = '" + senh.getText().toString() + "'";
                     rs = stmt.executeQuery("Select * from tblCliente where email = '" + usu.getText().toString() + "' and senha = '" + senh.getText().toString() + "'");
                     if(rs != null && rs.next())
                     {
-                        id = rs.getString("IDUsuario");
+                        id = rs.getString("IDCliente");
                     }
                 }
             } catch (Exception e) {
@@ -119,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             try {
-                if(rs.next())
+                if(id != "")
                 {
                     Intent i = new Intent(MainActivity.this, HomeActivity.class);
                     startActivity(i);
@@ -133,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
                 {
                     Toast.makeText(MainActivity.this, "Usuario ou senha Incorreto :(", Toast.LENGTH_LONG).show();
                 }
-            } catch (SQLException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
             progressBar.animate().alpha(0f)
@@ -153,7 +154,7 @@ public class MainActivity extends AppCompatActivity {
     public static SharedPreferences sharedPref;
     Button cadastrar;
     EditText usu, senh;
-    String id;
+    String id = "";
     ImageView Login;
     ProgressBar progressBar;
 }

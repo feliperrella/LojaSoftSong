@@ -31,6 +31,7 @@ public class PerfilActivity extends Activity {
             getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
         setContentView(R.layout.activity_perfil);
+        new Load().execute();
     }
 
     class Load extends AsyncTask<String, String, String>
