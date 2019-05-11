@@ -1,7 +1,9 @@
 package com.example.lojasoftsong;
 
 import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -33,6 +35,13 @@ public class PerfilActivity extends Activity {
         setContentView(R.layout.activity_perfil);
         new Load().execute();
         ((TextView) findViewById(R.id.Nome)).setText(MainActivity.sharedPref.getString("nome", ""));
+        ((ImageView) findViewById(R.id.configs)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent x = new Intent(PerfilActivity.this, ConfigActivity.class);
+                startActivity(x, ActivityOptions.makeSceneTransitionAnimation(PerfilActivity.this).toBundle());
+            }
+        });
     }
 
     class Load extends AsyncTask<String, String, String>
@@ -45,14 +54,12 @@ public class PerfilActivity extends Activity {
                 if(connection != null)
                 {
                     Statement stmt = connection.createStatement();
-                    ResultSet rs = stmt.executeQuery("select pedido.IDPedido , produto.nome, produto.caminho_imagem, produto.preco_unitario from tblPedido as pedido inner join tblDetalhePedido as dtl on pedido.IDPedido = dtl.ID_Pedido inner join tblProduto as produto on dtl.ID_Produto = produto.IDProduto where pedido.ID_Cliente = " + MainActivity.sharedPref.getString("id", ""));
+                    ResultSet rs = stmt.executeQuery("select * from tblPedido where ID_Cliente = " + MainActivity.sharedPref.getString("id", ""));
                     rs.beforeFirst();
                     while (rs.next())
                     {
                         mCodigo.add(rs.getString("IDPedido"));
-                        mNames.add(rs.getString("nome"));
-                        mPreco.add(rs.getString("preco_unitario"));
-                        mImageUrls.add(rs.getString("caminho_imagem"));
+                        mNames.add("Pedido Realizado");
                     }
                 }
             } catch (Exception e) {
@@ -89,9 +96,9 @@ public class PerfilActivity extends Activity {
         public View getView(int i, View view, ViewGroup viewGroup) {
             LayoutInflater inflater = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.layout_produtos_linha, null);
-            Glide.with(getApplicationContext()).load(R.drawable.teste).into((ImageView) view.findViewById(R.id.ProdPic));
+            //Glide.with(getApplicationContext()).load(R.drawable.teste).into((ImageView) view.findViewById(R.id.ProdPic));
             ((TextView) view.findViewById(R.id.ProdName)).setText(mNames.get(i));
-            ((TextView) view.findViewById(R.id.ProdVal)).setText(mPreco.get(i));
+            ((TextView) view.findViewById(R.id.ProdVal)).setText("Codigo: " + mCodigo.get(i));
             return view;
         }
     }

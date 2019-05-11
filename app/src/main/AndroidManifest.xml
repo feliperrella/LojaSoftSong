@@ -25,6 +25,7 @@
         <activity android:name=".PerfilActivity" />
         <activity android:name=".CarrinhoActivity" />
         <activity android:name=".SigninActivity" />
+        <activity android:name=".ConfigActivity" />
     </application>
     <supports-screens android:smallScreens="true" android:normalScreens="true" android:largeScreens="true" android:xlargeScreens="true" android:anyDensity="true"></supports-screens>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
