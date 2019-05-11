@@ -32,6 +32,7 @@ public class PerfilActivity extends Activity {
         }
         setContentView(R.layout.activity_perfil);
         new Load().execute();
+        ((TextView) findViewById(R.id.Nome)).setText(MainActivity.sharedPref.getString("nome", ""));
     }
 
     class Load extends AsyncTask<String, String, String>

@@ -108,6 +108,8 @@ public class MainActivity extends AppCompatActivity {
                     if(rs != null && rs.next())
                     {
                         id = rs.getString("IDCliente");
+                        endereco = rs.getString("endereco");
+                        nome = rs.getString("nome");
                     }
                 }
             } catch (Exception e) {
@@ -128,6 +130,8 @@ public class MainActivity extends AppCompatActivity {
                     SharedPreferences.Editor editor = sharedPref.edit();
                     editor.putString("email" ,usu.getText().toString());
                     editor.putString("id", id);
+                    editor.putString("endereco", endereco);
+                    editor.putString("nome", nome);
                     editor.apply();
                 }
                 else
@@ -154,7 +158,7 @@ public class MainActivity extends AppCompatActivity {
     public static SharedPreferences sharedPref;
     Button cadastrar;
     EditText usu, senh;
-    String id = "";
+    String id = "", endereco = "", nome = "";
     ImageView Login;
     ProgressBar progressBar;
 }

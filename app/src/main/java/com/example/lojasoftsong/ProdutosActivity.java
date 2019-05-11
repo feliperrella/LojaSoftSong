@@ -65,7 +65,9 @@ public class ProdutosActivity extends Activity {
             public void onClick(View view) {
                 width();
                 resto();
-                HomeActivity.Carrinho.add(StaggeredRecyclerViewAdapter.id);
+                CarrinhoActivity.Nome.add(a);
+                CarrinhoActivity.Preco.add(b);
+                CarrinhoActivity.Caminho_Imagem.add(e);
             }
         });
     }
@@ -103,6 +105,7 @@ public class ProdutosActivity extends Activity {
                         b = b.substring(0, b.length() - 2);
                         c = c.substring(0, c.length()-2);
                         d = rs.getString("descricao");
+                        e = rs.getString("caminho_imagem");
                     }
                 }
             }
@@ -154,6 +157,6 @@ public class ProdutosActivity extends Activity {
     private GyroscopeObserver gyroscopeObserver;
     TextView tchau, PrecoPromo;
     CheckView check;
-    String a = null, b = null, c = null, d = null;
+    String a = null, b = null, c = null, d = null, e = null;
     private PhotoViewAttacher mAttacher;
 }

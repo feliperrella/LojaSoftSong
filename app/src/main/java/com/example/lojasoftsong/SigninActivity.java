@@ -51,10 +51,11 @@ public class SigninActivity extends Activity {
         Nome = findViewById(R.id.txtNome);
         Email = findViewById(R.id.txtEmail);
         Senha = findViewById(R.id.txtSenha);
+        Endereço = findViewById(R.id.txtEndereco);
         Cadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!Nome.getText().toString().equals("") && !Email.getText().toString().equals("") && !Senha.getText().toString().equals("")) {
+                if(!Nome.getText().toString().equals("") && !Email.getText().toString().equals("") && !Senha.getText().toString().equals("") && !Endereço.getText().toString().equals("")) {
                     width();
                     resto();
                     new Cadastrar().execute();
@@ -108,7 +109,7 @@ public class SigninActivity extends Activity {
                 if(connection != null)
                 {
                    Statement stmt = connection.createStatement();
-                   count = stmt.executeUpdate("Insert into tblCliente(nivel_acesso, nome, tel1,email,senha,CPF, endereco, cidade, estado, CEP, genero) values(0,'" + Nome.getText().toString() + "','','" + Email.getText().toString() + "','" + Senha.getText().toString() + "', '', '', '', '', '','')");
+                   count = stmt.executeUpdate("Insert into tblCliente(nivel_acesso, nome, tel1,email,senha,CPF, endereco, cidade, estado, CEP, genero) values(0,'" + Nome.getText().toString() + "','','" + Email.getText().toString() + "','" + Senha.getText().toString() + "', '', '" + Endereço.getText() + "', '', '', '','')");
                 }
             }
             catch (Exception e) {
@@ -135,6 +136,8 @@ public class SigninActivity extends Activity {
                         .start();
                 SharedPreferences.Editor editor = MainActivity.sharedPref.edit();
                 editor.putString("email", Email.getText().toString());
+                editor.putString("endereco", Endereço.getText().toString());
+                editor.putString("nome", Nome.getText().toString());
                 editor.apply();
                 new Handler().postDelayed(new Runnable()
                 {
@@ -153,5 +156,5 @@ public class SigninActivity extends Activity {
     TextView tchau;
     ProgressBar pb;
     CardView Cadastrar;
-    EditText Nome, Email, Senha;
+    EditText Nome, Email, Senha, Endereço;
 }

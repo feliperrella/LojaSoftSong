@@ -21,6 +21,7 @@
         <activity android:name=".HomeActivity" />
         <activity android:name=".ProdutosActivity" />
         <activity android:name=".SearchActivity" />
+        <activity android:name=".ConfirmActivity" />
         <activity android:name=".PerfilActivity" />
         <activity android:name=".CarrinhoActivity" />
         <activity android:name=".SigninActivity" />

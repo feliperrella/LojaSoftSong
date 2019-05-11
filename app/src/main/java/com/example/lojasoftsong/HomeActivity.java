@@ -101,7 +101,7 @@ public class HomeActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        badge.setNumber(Carrinho.size());
+        badge.setNumber(CarrinhoActivity.Nome.size());
     }
 
     public class Carro extends PagerAdapter{
@@ -196,6 +196,5 @@ public class HomeActivity extends Activity {
     private ArrayList<String> mNames = new ArrayList<>();
     private ArrayList<String> mCodigo = new ArrayList<>();
     private ArrayList<String> mPreco = new ArrayList<>();
-    public static ArrayList<String> Carrinho = new ArrayList<>();
     NotificationBadge badge;
 }
